@@ -11,7 +11,7 @@
                 <th width="20%">User ID</th>
                 <th width="20%">Name</th>
                 <th width="20%">Email</th>
-                <th width="20%">Role</th>
+                <th width="20%">Type</th>
                 <th width="10%"></th>
                 <th width="10%"></th>
             </tr>
@@ -20,7 +20,7 @@
                     <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
-                    <td></td>
+                    <td>{{$user->type}}</td>
                     <td>
                         <form action="{{route('get_user_edit')}}" method="get">
                             {{csrf_field()}}

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Client;
 use App\UserComplaint;
 use App\User;
 use Illuminate\Http\Request;
@@ -25,12 +26,13 @@ class AdminController extends Controller
     public function edit_user(Request $request){
         $this->validate($request, [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$request->id,
             'password' => 'required|string|min:6|confirmed',
         ]);
         $user=User::where('id',$request->id)->get()->first();
         $user->name=$request->name;
         $user->email=$request->email;
+        $user->type=$request->type;
         $user->password=bcrypt($request->password);
         $user->save();
         return redirect()->route('manage_users');
@@ -59,5 +61,27 @@ class AdminController extends Controller
 
     public function get_add_user(){
         return view('auth.register')->with('admin',true);
+    }
+
+    public function get_add_collection_point(){
+        $users=User::where('type',"USER")->get();
+        return view('admin.add_collection_point')->with('users',$users);
+    }
+
+    public function add_collection_point(Request $request){
+        $this->validate($request, [
+            'email' => 'required|string|email|max:255|exists:users,email',
+            'address' => 'required|string|min:6',
+            'lat_in' => 'required|string',
+            'lng_in' => 'required|string',
+        ]);
+        $client=new Client();
+        $user=User::where('email',$request->email)->first();
+        $client->user_id=$user->id;
+        $client->address=$request->address;
+        $client->lat_in=$request->lat_in;
+        $client->lng_in=$request->lng_in;
+        $client->save();
+        return redirect()->route('home');
     }
 }

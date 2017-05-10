@@ -78,6 +78,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 //get add user
     Route::get('/add_user', ['uses' => 'AdminController@get_add_user', 'as' => 'add_user']);
+        
+//get add collection point
+    Route::get('/add_collection_point', ['uses' => 'AdminController@get_add_collection_point', 'as' => 'add_collection_point']);
+
+//submit the client form
+    Route::post('/add_client', ['uses' => 'AdminController@add_collection_point', 'as' => 'add_client']);
+
 
     });
 });

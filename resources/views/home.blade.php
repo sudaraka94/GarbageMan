@@ -109,6 +109,16 @@
                         </div>
                     </a>
                 </div>
+                <div class="col-sm-6 col-md-3">
+                    <a href="{{route('add_collection_point')}}">
+                        <div class="thumbnail">
+                            {{--<img src="..." alt="...">--}}
+                            <div class="caption">
+                                <h3>Add Garbage Collection Points</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
         @elseif(Auth::user()->type=="WORKER")
         @endif

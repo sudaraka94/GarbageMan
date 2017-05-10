@@ -9,11 +9,7 @@
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="@if(isset($edit)){{ route('edit_user') }}@elseif(isset($admin)){{ route('add_user') }}@else{{ route('register') }}@endif">
                         {{ csrf_field() }}
-                        @if(isset($admin))
-                            <input type="hidden" name="type" value="ADMIN">
-                        @elseif(isset($worker))
-                            <input type="hidden" name="type" value="WORKER">
-                        @else
+                        @if(!isset($admin))
                             <input type="hidden" name="type" value="USER">
                         @endif
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -34,7 +30,7 @@
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="@if(isset($edit)){{$user->email}}@else{{ old('email') }}@endif" required>
+                                <input id="email" type="email" class="form-control" name="email" value="@if(isset($edit)){{$user->email}}@else{{ old('email') }}@endif"  required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -43,6 +39,19 @@
                                 @endif
                             </div>
                         </div>
+                            @if(isset($admin))
+                                <div class="form-group">
+                                    <label for="type" class="col-md-4 control-label">User Type</label>
+
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="type" id="type">
+                                            <option @if(isset($edit)) @if($user->type=="ADMIN")selected @endif @endif>ADMIN</option>
+                                            <option @if(isset($edit)) @if($user->type=="USER")selected @endif @endif>USER</option>
+                                            <option @if(isset($edit)) @if($user->type=="WORKER")selected @endif @endif>WORKER</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            @endif
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>

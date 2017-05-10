@@ -41,4 +41,10 @@ class User extends Authenticatable
 //        return GarbageRecord::where('user_id',Auth::user()->getAuthIdentifier())->get();
     return $this->hasMany('App\UserComplaint');
     }
+
+    //relationship with client
+    public function client()
+    {
+        return $this->hasOne('App\Client');
+    }
 }
