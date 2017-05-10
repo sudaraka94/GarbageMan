@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','type'
     ];
 
     /**
@@ -26,4 +27,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function records(){
+//        return GarbageRecord::where('user_id',Auth::user()->getAuthIdentifier())->get();
+    return $this->hasMany('App\GarbageRecord');
+    }
+    public function collection_records(){
+//        return GarbageRecord::where('user_id',Auth::user()->getAuthIdentifier())->get();
+    return $this->hasMany('App\CollectionRecord');
+    }
+    
+    public function user_complaints(){
+//        return GarbageRecord::where('user_id',Auth::user()->getAuthIdentifier())->get();
+    return $this->hasMany('App\UserComplaint');
+    }
 }
