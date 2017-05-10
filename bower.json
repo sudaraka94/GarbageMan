@@ -1,0 +1,21 @@
+{
+  "name": "GarabageMan",
+  "description": "",
+  "main": "",
+  "authors": [
+    "sudaraka94 <sudarakayasindu@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/sudaraka94/GarbageMan",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
