@@ -84,4 +84,9 @@ class AdminController extends Controller
         $client->save();
         return redirect()->route('home');
     }
+    
+    public function view_route(){
+        $clients=Client::get();
+        return view('admin.view_route')->with('clients',$clients);
+    }
 }

@@ -85,6 +85,9 @@ Route::group(['middleware' => 'auth'], function () {
 //submit the client form
     Route::post('/add_client', ['uses' => 'AdminController@add_collection_point', 'as' => 'add_client']);
 
+//get view colection route
+        Route::get('/view_route', ['uses' => 'AdminController@view_route', 'as' => 'view_route']);
+
 
     });
 });

@@ -119,6 +119,16 @@
                         </div>
                     </a>
                 </div>
+                <div class="col-sm-6 col-md-3">
+                    <a href="{{route('view_route')}}">
+                        <div class="thumbnail">
+                            {{--<img src="..." alt="...">--}}
+                            <div class="caption">
+                                <h3>View Collection Route</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
         @elseif(Auth::user()->type=="WORKER")
         @endif
