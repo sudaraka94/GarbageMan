@@ -47,4 +47,10 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Client');
     }
+
+    //relationship with admin
+    public function admin()
+    {
+        return $this->hasOne('App\Admin');
+    }
 }

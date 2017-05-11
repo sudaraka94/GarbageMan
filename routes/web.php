@@ -87,6 +87,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 //get view colection route
         Route::get('/view_route', ['uses' => 'AdminController@view_route', 'as' => 'view_route']);
+        
+//get edit council position
+        Route::get('/edit_council_pos', ['uses' => 'AdminController@edit_council_pos', 'as' => 'edit_council_pos']);
+        
+//post edit council position        
+        Route::post('/edit_council_pos', ['uses' => 'AdminController@edit_council_pos_post', 'as' => 'edit_council_pos']);
 
 
     });
