@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Area;
 use App\Client;
 use App\Council;
+use App\Truck;
 use App\UserComplaint;
 use App\User;
 use Illuminate\Http\Request;
@@ -120,11 +121,6 @@ class AdminController extends Controller
         return view('admin.manage_areas')->with('areas',$areas);
     }
 
-    public function manage_areas_post()
-    {
-        
-    }
-
     public function add_area()
     {
         return view('admin.add_area');
@@ -208,5 +204,55 @@ class AdminController extends Controller
         $client=Client::where('id',$request->id)->first();
         $client->delete();
         return redirect()->route('manage_collection_points');
+    }
+
+
+//    methods for truck managemant
+    public function manage_trucks(){
+        $trucks=Truck::get();
+        return view('admin.manage_trucks')->with('trucks',$trucks);
+    }
+
+    public function add_truck()
+    {
+        return view('admin.add_truck');
+
+    }
+
+    public function post_add_truck(Request $request)
+    {
+        $this->validate($request, [
+            'registration_no' => 'required|string|max:255',
+        ]);
+        $truck=new Truck();
+        $truck->registration_no=$request->registration_no;
+        $truck->council_id=1;
+        $truck->save();
+        return redirect()->route('manage_trucks');
+    }
+
+    public function get_edit_truck(Request $request)
+    {
+        $truck=Truck::where('id',$request->id)->first();
+        return view('admin.add_truck')->with('edit',true)->with('truck',$truck);
+    }
+
+    public function edit_truck(Request $request)
+    {
+        $this->validate($request, [
+            'registration_no' => 'required|string|max:255',
+        ]);
+        $truck=Truck::where('id',$request->id)->first();
+        $truck->registration_no=$request->registration_no;
+        $truck->council_id=1;
+        $truck->save();
+        return redirect()->route('manage_trucks');
+    }
+
+    public function delete_truck(Request $request)
+    {
+        $truck=Truck::where('id',$request->id)->first();
+        $truck->delete();
+        return redirect()->route('manage_trucks');
     }
 }

@@ -118,5 +118,22 @@ Route::group(['middleware' => 'auth'], function () {
 //delete area
         Route::get('/delete_collection_point', ['uses' => 'AdminController@delete_collection_point', 'as' => 'delete_collection_point']);
         
+    //TRUCK ROUTES
+//get manage areas
+        Route::get('/manage_trucks', ['uses' => 'AdminController@manage_trucks', 'as' => 'manage_trucks']);
+
+//get add area
+        Route::get('/add_truck', ['uses' => 'AdminController@add_truck', 'as' => 'add_truck']);
+
+//post add area
+        Route::post('/add_truck', ['uses' => 'AdminController@post_add_truck', 'as' => 'add_truck']);
+//get edit area
+        Route::get('/edit_truck', ['uses' => 'AdminController@get_edit_truck', 'as' => 'edit_truck']);
+//post edit area
+        Route::post('/edit_truck', ['uses' => 'AdminController@edit_truck', 'as' => 'edit_truck']);
+//delete area
+        Route::get('/delete_truck', ['uses' => 'AdminController@delete_truck', 'as' => 'delete_truck']);
+
+
     });
 });

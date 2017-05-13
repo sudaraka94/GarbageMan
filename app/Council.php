@@ -12,4 +12,9 @@ class Council extends Model
         return $this->hasMany('App\Admin');
     }
 
+    public function truck()
+    {
+        return $this->hasMany('App\Truck');
+    }
+
 }
