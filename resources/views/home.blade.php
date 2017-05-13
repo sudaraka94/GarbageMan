@@ -24,6 +24,7 @@
     {{--</div>--}}
     {{--</div>--}}
     @if(Auth::check())
+        <h1>Welcome to {{$council->name}}</h1>
         @if(Auth::user()->type=="USER")
             <div class="row">
                 <div class="col-sm-6 col-md-3">
@@ -110,11 +111,11 @@
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-3">
-                    <a href="{{route('add_collection_point')}}">
+                    <a href="{{route('manage_collection_points')}}">
                         <div class="thumbnail">
                             {{--<img src="..." alt="...">--}}
                             <div class="caption">
-                                <h3>Add Garbage Collection Points</h3>
+                                <h3>Manage Collection Points</h3>
                             </div>
                         </div>
                     </a>
@@ -125,6 +126,26 @@
                             {{--<img src="..." alt="...">--}}
                             <div class="caption">
                                 <h3>View Collection Route</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <a href="{{route('edit_council_pos_get')}}">
+                        <div class="thumbnail">
+                            {{--<img src="..." alt="...">--}}
+                            <div class="caption">
+                                <h3>Edit Council Details</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <a href="{{route('manage_areas')}}">
+                        <div class="thumbnail">
+                            {{--<img src="..." alt="...">--}}
+                            <div class="caption">
+                                <h3>Manage Collection Areas</h3>
                             </div>
                         </div>
                     </a>

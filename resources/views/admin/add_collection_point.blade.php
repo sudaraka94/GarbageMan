@@ -19,18 +19,17 @@
         @endif
         <div class="container">
             <h2>Add a client</h2>
-            <form action="{{route('add_client')}}" method="post">
+            <form class="form-horizontal" action="@if (isset($edit)){{route('edit_collection_point')}} @else {{route('add_client')}} @endif" method="post">
                 {{csrf_field()}}
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                 <label for="email" class="col-md-4 control-label">User E-Mail Address</label>
-<datalist id="emails">
-    @foreach($users as $user)
-    <option>{{$user->email}}</option>
-        @endforeach
-</datalist>
                 <div class="col-md-8">
-                    <input list="emails" autocomplete="off" id="email" type="email" class="form-control" name="email" value="@if(isset($edit)){{$user->email}}@else{{ old('email') }}@endif"  required>
-
+                    <input list="emails" id="email" type="email" class="form-control" name="email" value="@if(isset($edit)){{$client->user->email}}@else{{ old('email') }}@endif"  required>
+                    <datalist id="emails">
+                        @foreach($users as $user)
+                            <option value="{{$user->email}}">
+                        @endforeach
+                    </datalist>
                     @if ($errors->has('email'))
                         <span class="help-block">
                             <strong>{{ $errors->first('email') }}</strong>
@@ -38,20 +37,38 @@
                     @endif
                 </div>
             </div>
-            <div class="form-group{{ $errors->has('map') ? ' has-error' : '' }}" >
-                    <label for="map" class="col-md-4 control-label">User Collection Point <br> <br><small>Longitude : <div id="lg"></div> </small><br> <small>Latitude : <div id="lat"></div> </small></label>
-                <div class="container" >
-                    <div id="map" height="10px" width="100%" class="col-md-8" style="padding-right: 45px;margin-right: 10px;margin-top: 10px"></div>
+                <div class="form-group{{ $errors->has('area') ? ' has-error' : '' }}">
+                    <label for="area" class="col-md-4 control-label">Area</label>
+                    <div class="col-md-8">
+                        <select list="area"  id="area"  class="form-control" name="area">
+                            @foreach($areas as $area)
+                                <option value="{{$area->id}}" @if(isset($edit))@if($client->area->id==$area->id) selected @endif @endif>{{$area->name}}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('area'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('area') }}</strong>
+                            </span>
+                        @endif
+                    </div>
                 </div>
-                <input type="hidden" id="lng_in" name="lng_in" value="">
-                <input type="hidden" id="lat_in" name="lat_in" value="">
-        </div>
+    @if(isset($edit))
+                    <input type="hidden" name="id" value="{{$client->id}}">
+    @endif
+                <div class="form-group{{ $errors->has('map') ? ' has-error' : '' }}" >
+                    <label for="map" class="col-md-4 control-label">User Collection Point <br> <br><small>Longitude : <div id="lg"></div> </small><br> <small>Latitude : <div id="lat"></div> </small></label>
+                    <div class="container" >
+                        <div id="map" height="10px" width="100%" class="col-md-8" style=""></div>
+                    </div>
+                    <input type="hidden" id="lng_in" name="lng_in" value="@if(isset($edit)){{$client->lng_in}}@else{{ old('lng_in') }}@endif">
+                    <input type="hidden" id="lat_in" name="lat_in" value="@if(isset($edit)){{$client->lat_in}}@else{{ old('lat_in') }}@endif">
+                </div>
 
             <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
                 <label for="comment" class="col-md-4 control-label">User Address</label>
                 <div class="col-md-8">
 
-                    <textarea class="form-control" rows="5"  name="address" id="address">{{ old('address') }}</textarea>
+                    <textarea class="form-control" rows="5"  name="address" id="address">@if(isset($edit)){{$client->address}}@else{{ old('address') }}@endif</textarea>
                     @if ($errors->has('address'))
                         <span class="help-block">
                             <strong>{{ $errors->first('address') }}</strong>
@@ -64,7 +81,6 @@
                 <button style="float: right;margin-top: 4%;margin-bottom: 4%" type="submit" class="btn btn-default">Submit</button>
             </div>
             </form>
-<div style="height: 10%"></div>
         </div>
         <script>
 //            variables needed
@@ -75,10 +91,28 @@
 
             function initMap() {
                 map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: 6.787646, lng: 79.887600},
+                    @if(isset($edit))
+                        center: {lat: {{$client->lat_in}}, lng: {{$client->lng_in}}},
+                    @else
+                        center: {lat: {{$ccouncil->lat_in}}, lng: {{$council->lng_in}}},
+                    @endif
                     zoom: 16
                 });
+                @if(isset($edit))
+                    marker = new google.maps.Marker({
+                        position: {lat: {{$client->lat_in}}, lng: {{$client->lng_in}}},
+                        map: map
+                    });
+                var ln_div = document.getElementById('lg');
+                var lat_div = document.getElementById('lat');
+                var lat_in = document.getElementById('lat_in');
+                var lng_in = document.getElementById('lng_in');
 
+                ln_div.innerHTML = marker.getPosition().lng();
+                lat_div.innerHTML =marker.getPosition().lat();
+                lng_in.value=marker.getPosition().lng();
+                lat_in.value=marker.getPosition().lat();
+                @endif
                 infowindow = new google.maps.InfoWindow({
                     content: document.getElementById('form')
                 })

@@ -45,7 +45,7 @@ class User extends Authenticatable
     //relationship with client
     public function client()
     {
-        return $this->hasOne('App\Client');
+        return $this->hasMany('App\Client');
     }
 
     //relationship with admin

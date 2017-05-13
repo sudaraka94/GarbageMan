@@ -20,14 +20,28 @@
     <div class="container">
         <h2>Change Council Location</h2>
         <form action="{{route('edit_council_pos')}}" method="post">
+            <input type="hidden" name="id" id="id" value="{{$council->id}}">
             {{csrf_field()}}
+            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                <label for="name" class="col-md-4 control-label">Council Name</label>
+                <div class="col-md-8">
+                    <input id="name" type="text" class="form-control" name="name" value="@if(isset($council)){{$council->name}}@else{{ old('name') }}@endif"  required>
+
+                    @if ($errors->has('name'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('name') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
             <div class="form-group{{ $errors->has('map') ? ' has-error' : '' }}" >
-                <label for="map" class="col-md-4 control-label">User Collection Point <br> <br><small>Longitude : <div id="lg"></div> </small><br> <small>Latitude : <div id="lat"></div> </small></label>
+                <label for="map" class="col-md-4 control-label">Location <br> <br><small>Longitude : <div id="lg"></div> </small><br> <small>Latitude : <div id="lat"></div> </small></label>
                 <div class="container" >
                     <div id="map" height="10px" width="100%" class="col-md-8" style="padding-right: 45px;margin-right: 10px;margin-top: 10px"></div>
                 </div>
-                <input type="hidden" id="lng_in" name="lng_in" value="">
-                <input type="hidden" id="lat_in" name="lat_in" value="">
+                <input type="hidden" id="lng_in" name="lng_in" value="{{$council->lng_in}}">
+                <input type="hidden" id="lat_in" name="lat_in" value="{{$council->lat_in}}">
             </div>
 
             <div class="form-group">
@@ -45,10 +59,14 @@
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 6.787646, lng: 79.887600},
+                center: {lat: {{$council->lat_in}}, lng: {{$council->lng_in}}},
                 zoom: 16
             });
+            marker = new google.maps.Marker({
+                position: {lat: {{$council->lat_in}}, lng: {{$council->lng_in}}},
+                map: map
 
+            });
             infowindow = new google.maps.InfoWindow({
                 content: document.getElementById('form')
             })

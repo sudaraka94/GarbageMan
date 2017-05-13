@@ -11,7 +11,13 @@ class Client extends Model
 //    one to one relationship
     public function user()
     {
-        return $this->hasOne('App\User' );
+        return $this->belongsTo('App\User' );
+    }
+    
+    //many to one with zrea
+    public function area()
+    {
+        return $this->belongsTo('App\Area' );
     }
 }
 

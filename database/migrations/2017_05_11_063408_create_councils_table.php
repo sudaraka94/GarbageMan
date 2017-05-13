@@ -15,6 +15,7 @@ class CreateCouncilsTable extends Migration
     {
         Schema::create('councils', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->string('lat_in');
             $table->string('lng_in');
             $table->timestamps();

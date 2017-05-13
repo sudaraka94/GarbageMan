@@ -89,11 +89,34 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/view_route', ['uses' => 'AdminController@view_route', 'as' => 'view_route']);
         
 //get edit council position
-        Route::get('/edit_council_pos', ['uses' => 'AdminController@edit_council_pos', 'as' => 'edit_council_pos']);
+        Route::get('/edit_council_pos', ['uses' => 'AdminController@edit_council_pos', 'as' => 'edit_council_pos_get']);
         
 //post edit council position        
         Route::post('/edit_council_pos', ['uses' => 'AdminController@edit_council_pos_post', 'as' => 'edit_council_pos']);
 
+//get manage areas
+        Route::get('/manage_areas', ['uses' => 'AdminController@manage_areas', 'as' => 'manage_areas']);
 
+//get add area
+        Route::get('/add_area', ['uses' => 'AdminController@add_area', 'as' => 'add_area']);
+
+//post add area
+        Route::post('/add_area', ['uses' => 'AdminController@post_add_area', 'as' => 'add_area']);
+//get edit area
+        Route::get('/edit_area', ['uses' => 'AdminController@get_edit_area', 'as' => 'edit_area']);
+//post edit area
+        Route::post('/edit_area', ['uses' => 'AdminController@edit_area', 'as' => 'edit_area']);
+//delete area
+        Route::get('/delete_area', ['uses' => 'AdminController@delete_area', 'as' => 'delete_area']);
+
+//manage collection points
+        Route::get('/manage_collection_points', ['uses' => 'AdminController@manage_collection_points', 'as' => 'manage_collection_points']);
+//get edit client
+        Route::get('/edit_collection_point', ['uses' => 'AdminController@get_edit_collection_point', 'as' => 'edit_collection_point']);
+//post edit area
+        Route::post('/edit_collection_point', ['uses' => 'AdminController@edit_collection_point', 'as' => 'edit_collection_point']);
+//delete area
+        Route::get('/delete_collection_point', ['uses' => 'AdminController@delete_collection_point', 'as' => 'delete_collection_point']);
+        
     });
 });
