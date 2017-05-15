@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use App\Council;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -25,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $council=Council::get()->first();
-        return view('home')->with('council',$council);
+        $client=Client::where('user_id',Auth::user()->getAuthIdentifier())->first();
+        return view('home')->with('council',$council)->with('client',$client);
     }
 }

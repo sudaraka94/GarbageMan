@@ -11,14 +11,20 @@ class user_controller extends Controller
     public function submit_record(Request $request){
         $rec=new GarbageRecord();
         $rec->weight=$request->amount;
-        $rec->user_id=Auth::user()->getAuthIdentifier();
+        $rec->client_id=Auth::user()->client->id;
         $rec->save();
-        return redirect()->route('home');
+        return redirect()->route('view_records');
     }
     
     public function view_records(){
-//        $records=Auth::user()->get_records();
-        return view('user.view_records');
+        $client=Auth::user()->client->records;
+        return view('user.view_records')->with('records',$client);
+    }
+
+    public function delete_record(Request $request){
+        $record=GarbageRecord::where('id',$request->id);
+        $record->delete();
+        return redirect()->route('view_records');
     }
 
     public function view_collection_records(){

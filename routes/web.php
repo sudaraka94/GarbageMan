@@ -31,6 +31,9 @@ Route::group(['middleware' => 'auth'], function () {
 //submit garbage record
         Route::post('/add_garbage_record', ['uses' => 'user_controller@submit_record', 'as' => 'add_garbage']);
 
+//delete garbage record
+        Route::post('/delete_garbage_record', ['uses' => 'user_controller@delete_record', 'as' => 'delete_garbage']);        
+
 //get garbage_records
         Route::get('/view_records', ['uses' => 'user_controller@view_records', 'as' => 'view_records']);
 
@@ -45,6 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 //get filed complaints
         Route::get('/get_complaints', ['uses' => 'user_controller@get_complaints', 'as' => 'get_complaints']);
+        
+        
     });
 
 //=============================================================================================================================

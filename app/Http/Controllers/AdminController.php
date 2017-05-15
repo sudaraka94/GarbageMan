@@ -32,7 +32,7 @@ class AdminController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,'.$request->id,
             'password' => 'required|string|min:6|confirmed',
         ]);
-        $user=User::where('id',$request->id)->get()->first();
+            $user=User::where('id',$request->id)->get()->first();
         $user->name=$request->name;
         $user->email=$request->email;
         $user->type=$request->type;
@@ -92,8 +92,9 @@ class AdminController extends Controller
         return redirect()->route('manage_collection_points');
     }
     
-    public function view_route(){
-        $clients=Client::get();
+    public function view_route($area){
+        return 'ok';
+        $clients=$area->client;
         return view('admin.view_route')->with('clients',$clients);
     }
 
@@ -266,7 +267,9 @@ class AdminController extends Controller
     public function view_path($area_id)
     {
         $area=Area::where('id',$area_id)->first();
-        
+        $clients=$area->get_active_points();
+        return view('admin.view_route')->with('clients',$clients);
+
     }
 
     //this is the implementation of the area suggestion algorythem. THis algorithem is the key feature of the whole system
@@ -286,12 +289,16 @@ class AdminController extends Controller
                     $temp_chosen=$area;
                 }
                 elseif($area->get_garbage_amount()>$max_weight){
+                    $max_weight=$area->get_garbage_amount();
                     $temp_chosen=$area;
                 }
             }
-            array_push($chosen_areas,$temp_chosen);
-            $areas->keyBy('id');
-            $areas->forget($temp_chosen->id);
+            if($max_weight!=0) {
+                array_push($chosen_areas, $temp_chosen);
+                $areas->keyBy('id');
+                $key=$temp_chosen->id;
+                $areas=$areas->except($key);
+            }
         }
         return $chosen_areas;
     }

@@ -94,7 +94,7 @@
                     @if(isset($edit))
                         center: {lat: {{$client->lat_in}}, lng: {{$client->lng_in}}},
                     @else
-                        center: {lat: {{$ccouncil->lat_in}}, lng: {{$council->lng_in}}},
+                        center: {lat: {{$council->lat_in}}, lng: {{$council->lng_in}}},
                     @endif
                     zoom: 16
                 });

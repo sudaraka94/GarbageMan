@@ -23,7 +23,20 @@ class Client extends Model
     //one to many relationship with garbagerecord
     public function garbageRecord()
     {
-        return $this->belongsToMany('App\GarbageRecord');
+        return $this->hasMany('App\GarbageRecord');
     }
+
+    public function records(){
+        return $this->hasMany('App\GarbageRecord');
+    }
+    public function collection_records(){
+        return $this->hasMany('App\CollectionRecord');
+    }
+
+    public function user_complaints(){
+        return $this->hasMany('App\UserComplaint');
+    }
+
+
 }
 

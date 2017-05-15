@@ -13,10 +13,11 @@
         <div class="row">
             @for($i=0; $i<count($areas); $i++)
             <div class="col-sm-6 col-md-3">
-                <a href="">
+                <a href="{{route('view_path',['area'=>$areas[$i]->id])}}">
                     <div class="thumbnail">
                         {{--<img src="..." alt="...">--}}
                         <div class="caption">
+{{--                            <h3>Route for {{$trucks[$i]->registration_no}} truck</h3>--}}
                             <h3>Route for {{$trucks[$i]->registration_no}} truck</h3>
                         </div>
                     </div>

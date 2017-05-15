@@ -34,4 +34,23 @@ class Area extends Model
         }
         return $tot_weight;
     }
+
+
+    //this method returns only the places with garbage records
+    public function get_active_points()
+    {
+        $clients=$this->client;
+        $with_garb=[];
+        foreach ($clients as $client){
+            $garbage_records=GarbageRecord::where('client_id',$client->id)->get();
+            $tot_weight=0;
+            foreach ($garbage_records as $record){
+                $tot_weight=$tot_weight+$record->weight;
+            }
+            if($tot_weight>0){
+                array_push($with_garb,$client);
+            }
+        }
+        return $with_garb;
+    }
 }

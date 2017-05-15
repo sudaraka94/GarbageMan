@@ -27,25 +27,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function records(){
-//        return GarbageRecord::where('user_id',Auth::user()->getAuthIdentifier())->get();
-    return $this->hasMany('App\GarbageRecord');
-    }
-    public function collection_records(){
-//        return GarbageRecord::where('user_id',Auth::user()->getAuthIdentifier())->get();
-    return $this->hasMany('App\CollectionRecord');
-    }
     
-    public function user_complaints(){
-//        return GarbageRecord::where('user_id',Auth::user()->getAuthIdentifier())->get();
-    return $this->hasMany('App\UserComplaint');
-    }
-
-    //relationship with client
+//    relationship with client
     public function client()
     {
-        return $this->hasMany('App\Client');
+        return $this->hasOne('App\Client');
     }
 
     //relationship with admin

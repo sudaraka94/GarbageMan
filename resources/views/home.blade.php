@@ -25,7 +25,7 @@
     {{--</div>--}}
     @if(Auth::check())
         <h1>Welcome to {{$council->name}}</h1>
-        @if(Auth::user()->type=="USER")
+        @if(Auth::user()->type=="USER" and $client!=null)
             <div class="row">
                 <div class="col-sm-6 col-md-3">
                     <a href="{{route('add_garbage')}}">
@@ -87,6 +87,21 @@
                         </div>
                     </a>
                 </div>
+            </div>
+        @elseif(Auth::user()->type=="USER")
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Alert!</strong> No collection points have been registered in your name. Some functions may not be available.
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <a href="">
+                    <div class="thumbnail">
+                        {{--<img src="..." alt="...">--}}
+                        <div class="caption">
+                            <h3>Edit Profile</h3>
+                        </div>
+                    </div>
+                </a>
             </div>
         @elseif(Auth::user()->type=="ADMIN")
             <div class="row">
