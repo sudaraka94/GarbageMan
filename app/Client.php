@@ -19,5 +19,11 @@ class Client extends Model
     {
         return $this->belongsTo('App\Area' );
     }
+
+    //one to many relationship with garbagerecord
+    public function garbageRecord()
+    {
+        return $this->belongsToMany('App\GarbageRecord');
+    }
 }
 

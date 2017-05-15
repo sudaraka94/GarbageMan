@@ -15,7 +15,7 @@ class CreateGarbageRecordTable extends Migration
     {
         Schema::create('garbage_record', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('client_id')->references('id')->on('client');
             $table->float('weight');
             $table->timestamps();
         });

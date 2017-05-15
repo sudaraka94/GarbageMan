@@ -255,4 +255,31 @@ class AdminController extends Controller
         $truck->delete();
         return redirect()->route('manage_trucks');
     }
+
+    //this is the implementation of the area suggestion algorythem. THis algorithem is the key feature of the whole system
+    public function area_suggestion()
+    {
+        $truck_count= count(Truck::get()); //gets the number of trucks
+        $areas = Area::get(); //gets all the areas in the council
+        $chosen_areas=[]; //areas chosen for collecting garbage
+        if(count($areas)==0){
+            return null;
+        }
+        for ($i=0 ; $i<$truck_count ;$i++){
+            $max_weight=0;
+            $temp_chosen=$areas[0];
+            foreach ($areas as $area){  
+                if ($temp_chosen==null){
+                    $temp_chosen=$area;
+                }
+                elseif($area->get_garbage_amount()>$max_weight){
+                    $temp_chosen=$area;
+                }
+            }
+            array_push($chosen_areas,$temp_chosen);
+            $areas->keyBy('id');
+            $areas->forget($temp_chosen->id);
+        }
+        dd($chosen_areas);
+    }
 }

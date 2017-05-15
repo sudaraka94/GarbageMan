@@ -10,9 +10,7 @@
 |
 */
 
-Route::get('/', ['uses'=>function () {
-    return view('home');
-},'as'=>'home']);
+Route::get('/', 'HomeController@index');
 
 
 
@@ -134,6 +132,9 @@ Route::group(['middleware' => 'auth'], function () {
 //delete area
         Route::get('/delete_truck', ['uses' => 'AdminController@delete_truck', 'as' => 'delete_truck']);
 
+
+//These routes are used to test the algo
+        Route::get('/algo_test', ['uses' => 'AdminController@area_suggestion', 'as' => 'algo_test']);
 
     });
 });

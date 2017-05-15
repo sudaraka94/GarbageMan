@@ -16,4 +16,22 @@ class Area extends Model
     {
         return $this->hasMany('App\Client');
     }
+
+    public function garbageRecord()
+    {
+        return $this->hasMany('App\GarbageRecord');
+    }
+
+    public function get_garbage_amount()
+    {
+        $clients=$this->client;
+        $tot_weight=0;
+        foreach ($clients as $client){
+            $garbage_records=GarbageRecord::where('client_id',$client->id)->get();
+            foreach ($garbage_records as $record){
+                $tot_weight=$tot_weight+$record->weight;
+            }
+        }
+        return $tot_weight;
+    }
 }

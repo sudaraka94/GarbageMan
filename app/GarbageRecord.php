@@ -8,8 +8,8 @@ class GarbageRecord extends Model
 {
     protected $table='garbage_record';
 
-    public function user()
+    public function client()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Client');
     }
 }

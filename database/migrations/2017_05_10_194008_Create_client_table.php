@@ -15,7 +15,7 @@ class CreateClientTable extends Migration
     {
         Schema::create('client', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->references('id')->on('users');
+            $table->integer('user_id')->references('id')->on('user');
             $table->integer('area_id')->references('id')->on('areas');
             $table->string('lat_in');
             $table->string('lng_in');
