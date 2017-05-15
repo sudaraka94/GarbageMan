@@ -256,6 +256,19 @@ class AdminController extends Controller
         return redirect()->route('manage_trucks');
     }
 
+    public function view_suggestions()
+    {
+        $areas=$this->area_suggestion();
+        $trucks=Truck::get();
+        return view('admin.route_list')->with('areas',$areas)->with('trucks',$trucks);
+    }
+
+    public function view_path($area_id)
+    {
+        $area=Area::where('id',$area_id)->first();
+        
+    }
+
     //this is the implementation of the area suggestion algorythem. THis algorithem is the key feature of the whole system
     public function area_suggestion()
     {
@@ -280,6 +293,6 @@ class AdminController extends Controller
             $areas->keyBy('id');
             $areas->forget($temp_chosen->id);
         }
-        dd($chosen_areas);
+        return $chosen_areas;
     }
 }

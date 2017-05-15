@@ -84,7 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/add_client', ['uses' => 'AdminController@add_collection_point', 'as' => 'add_client']);
 
 //get view colection route
-        Route::get('/view_route', ['uses' => 'AdminController@view_route', 'as' => 'view_route']);
+        Route::get('/view_route', ['uses' => 'AdminController@view_suggestions', 'as' => 'view_route']);
         
 //get edit council position
         Route::get('/edit_council_pos', ['uses' => 'AdminController@edit_council_pos', 'as' => 'edit_council_pos_get']);
@@ -131,6 +131,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/edit_truck', ['uses' => 'AdminController@edit_truck', 'as' => 'edit_truck']);
 //delete area
         Route::get('/delete_truck', ['uses' => 'AdminController@delete_truck', 'as' => 'delete_truck']);
+
+//route for viewing calculated path
+        Route::get('/view_suggestion/{area_id}', ['uses' => 'AdminController@view_path', 'as' => 'view_path']);
 
 
 //These routes are used to test the algo
