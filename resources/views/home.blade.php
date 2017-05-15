@@ -10,19 +10,6 @@
 @endsection
 @section('content')
 <div class="container">
-    {{--<div class="container">--}}
-    {{--<div class="row">--}}
-    {{--<div class="col-md-8 col-md-offset-2">--}}
-    {{--<div class="panel panel-default">--}}
-    {{--<div class="panel-heading">Dashboard</div>--}}
-
-    {{--<div class="panel-body">--}}
-    {{--You are logged in!--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
     @if(Auth::check())
         <h1>Welcome to {{$council->name}}</h1>
         @if(Auth::user()->type=="USER" and $client!=null)
@@ -177,6 +164,16 @@
                 </div>
             </div>
         @elseif(Auth::user()->type=="WORKER")
+            <div class="col-sm-6 col-md-3">
+                <a href="{{route('manage_trucks')}}">
+                    <div class="thumbnail">
+                        {{--<img src="..." alt="...">--}}
+                        <div class="caption">
+                            <h3>Add Collection Records</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
         @endif
     @else
         <h1>Welcome to GarbageMan</h1>
