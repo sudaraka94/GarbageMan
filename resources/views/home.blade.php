@@ -65,7 +65,7 @@
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-3">
-                    <a href="{{route('get_complaints')}}">
+                    <a href="{{route('user_complaints')}}">
                         <div class="thumbnail">
                             {{--<img src="..." alt="...">--}}
                             <div class="caption">
@@ -93,7 +93,7 @@
         @elseif(Auth::user()->type=="ADMIN")
             <div class="row">
                 <div class="col-sm-6 col-md-3">
-                    <a href="{{route('get_all_complaints')}}">
+                    <a href="{{route('admin_complaints')}}">
                         <div class="thumbnail">
                             {{--<img src="..." alt="...">--}}
                             <div class="caption">

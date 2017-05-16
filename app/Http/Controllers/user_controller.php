@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\GarbageRecord;
 use App\UserComplaint;
+use App\ComplaintReply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,5 +49,27 @@ class user_controller extends Controller
     public function get_complaints(){
 //        $records=Auth::user()->get_records();
         return view('user.view_user_complaints');
+    }
+
+    public function chat($complaint_id)
+    {
+        if($complaint_id==null){
+            $complaint_sel=UserComplaint::get()->first();
+        }else{
+            $complaint_sel=UserComplaint::where('id',$complaint_id)->get()->first();
+        }
+        $complaints=UserComplaint::get();
+        return view('user.chat')->with('complaints',$complaints)->with('complaint_sel',$complaint_sel);
+    }
+
+    public function post_reply(Request $request)
+    {
+        
+        $reply= new ComplaintReply();
+        $reply->user_complaint_id=$request->complaint_id;
+        $reply->message=$request->complaint;
+        $reply->user_id=Auth::user()->getAuthIdentifier();
+        $reply->save();
+        return redirect()->route('user_complaints',['complaint_id'=>$request->complaint_id]);
     }
 }

@@ -12,4 +12,9 @@ class UserComplaint extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function complaint_replies()
+    {
+        return $this->hasMany('App\ComplaintReply');
+    }
 }

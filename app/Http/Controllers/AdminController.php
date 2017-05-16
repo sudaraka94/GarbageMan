@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 use App\Area;
 use App\Client;
+use App\ComplaintReply;
 use App\Council;
 use App\Truck;
 use App\UserComplaint;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -303,5 +305,26 @@ class AdminController extends Controller
             }
         }
         return $chosen_areas;
+    }
+
+    public function chat($complaint_id)
+    {
+        if($complaint_id==null){
+            $complaint_sel=UserComplaint::get()->first();
+        }else{
+            $complaint_sel=UserComplaint::where('id',$complaint_id)->get()->first();
+        }
+        $complaints=UserComplaint::get();
+        return view('admin.chat')->with('complaints',$complaints)->with('complaint_sel',$complaint_sel);
+    }
+
+    public function post_reply(Request $request)
+    {
+        $reply= new ComplaintReply();
+        $reply->user_complaint_id=$request->complaint_id;
+        $reply->message=$request->complaint;
+        $reply->user_id=Auth::user()->getAuthIdentifier();
+        $reply->save();
+        return redirect()->route('admin_complaints',['complaint_id'=>$request->complaint_id]);
     }
 }

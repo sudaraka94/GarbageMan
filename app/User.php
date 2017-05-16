@@ -43,4 +43,9 @@ class User extends Authenticatable
     public function user_complaints(){
         return $this->hasMany('App\UserComplaint');
     }
+
+    public function complaint_reply()
+    {
+        return $this->hasMany('App\ComplaintReply');
+    }
 }

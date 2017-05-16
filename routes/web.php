@@ -48,7 +48,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 //get filed complaints
         Route::get('/get_complaints', ['uses' => 'user_controller@get_complaints', 'as' => 'get_complaints']);
-        
+//getting the chat interface
+        Route::get('/user_complaints/{id?}', ['uses' => 'user_controller@chat', 'as' => 'user_complaints']);
+//submitting a rply
+        Route::post('/user_post_reply', ['uses' => 'user_controller@post_reply', 'as' => 'user_post_reply']);
+
         
     });
 
@@ -143,6 +147,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 //These routes are used to test the algo
         Route::get('/algo_test', ['uses' => 'AdminController@area_suggestion', 'as' => 'algo_test']);
+        //getting the chat interface
+        Route::get('/complaints/{id?}', ['uses' => 'AdminController@chat', 'as' => 'admin_complaints']);
+//submitting a rply
+        Route::post('/post_reply', ['uses' => 'AdminController@post_reply', 'as' => 'post_reply']);
 
     });
 
