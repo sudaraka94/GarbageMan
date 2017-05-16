@@ -93,7 +93,6 @@ class AdminController extends Controller
     }
     
     public function view_route($area){
-        return 'ok';
         $clients=$area->client;
         return view('admin.view_route')->with('clients',$clients);
     }
@@ -268,7 +267,8 @@ class AdminController extends Controller
     {
         $area=Area::where('id',$area_id)->first();
         $clients=$area->get_active_points();
-        return view('admin.view_route')->with('clients',$clients);
+        $council=Council::get()->first();
+        return view('admin.view_route')->with('council',$council)->with('clients',$clients);
 
     }
 

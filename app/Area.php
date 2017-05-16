@@ -29,7 +29,9 @@ class Area extends Model
         foreach ($clients as $client){
             $garbage_records=GarbageRecord::where('client_id',$client->id)->get();
             foreach ($garbage_records as $record){
-                $tot_weight=$tot_weight+$record->weight;
+                if($record->collected==0) {
+                    $tot_weight = $tot_weight + $record->weight;
+                }
             }
         }
         return $tot_weight;
@@ -45,7 +47,9 @@ class Area extends Model
             $garbage_records=GarbageRecord::where('client_id',$client->id)->get();
             $tot_weight=0;
             foreach ($garbage_records as $record){
-                $tot_weight=$tot_weight+$record->weight;
+                if($record->collected==0) {
+                    $tot_weight = $tot_weight + $record->weight;
+                }
             }
             if($tot_weight>0){
                 array_push($with_garb,$client);

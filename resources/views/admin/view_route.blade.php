@@ -48,6 +48,12 @@
 @endsection
 @section('content')
     <div class="container">
+        @if(count($clients)==0)
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Warning!</strong> No garbage collection points in the area
+            </div>
+        @endif
         <h2>Route for today</h2>
         <div id="map" style="height: 530px;"></div>
         <div id="right-panel">
@@ -63,7 +69,7 @@
             var directionsDisplay = new google.maps.DirectionsRenderer;
             var map = new google.maps.Map(document.getElementById('map'), {
                 zoom: 6,
-                center: {lat: 41.85, lng: -87.65}
+                center: {lat: {{$council->lat_in}}, lng: {{$council->lng_in}}}
             });
             directionsDisplay.setMap(map);
             calculateAndDisplayRoute(directionsService, directionsDisplay);

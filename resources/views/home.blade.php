@@ -164,6 +164,13 @@
                 </div>
             </div>
         @elseif(Auth::user()->type=="WORKER")
+            @if(Auth::user()->truck_id==null)
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Alert!</strong> Please update Your Truck before proceed
+                </div>
+            @endif
+            @if(Auth::user()->truck_id!=null)
             <div class="col-sm-6 col-md-3">
                 <a href="{{route('add_col_rec')}}">
                     <div class="thumbnail">
@@ -184,6 +191,7 @@
                     </div>
                 </a>
             </div>
+            @endif
             <div class="col-sm-6 col-md-3">
                 <a href="{{route('update_truck')}}">
                     <div class="thumbnail">

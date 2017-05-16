@@ -2,32 +2,32 @@
 @section('content')
     <div class="container">
         <div style="text-align: center">
-            <h1>Manage Areas</h1>
+            <h1>Manage Garbage Collection Records</h1>
         </div>
-        <a href="{{route('add_area')}}" type="button" class="btn btn-info">Add Area</a>
+        <a href="{{route('add_col_rec')}}" type="button" class="btn btn-info">Add Collection Record</a>
         <br><br>
         <table class="table" width="100%">
             <tr>
-                <th width="20%">User ID</th>
-                <th width="20%">Name</th>
+                <th width="20%">Truck</th>
+                <th width="20%">Collection Point</th>
                 <th width="10%"></th>
                 <th width="10%"></th>
             </tr>
-            @foreach($areas as $area)
+            @foreach($col_recs as $col_rec)
                 <tr>
-                    <td>{{$area->id}}</td>
-                    <td>{{$area->name}}</td>
+                    <td>{{$col_rec->truck->registration_no}}</td>
+                    <td>{{$col_rec->client->address}}</td>
                     <td>
-                        <form action="{{route('edit_area')}}" method="get">
-                            {{csrf_field()}}
-                            <input type="hidden" value="{{$area->id}}" name="id">
-                            <input type="submit" value="Edit" class="btn btn-success">
-                        </form>
+                        {{--<form action="{{route('edit_col_rec')}}" method="get">--}}
+                            {{--{{csrf_field()}}--}}
+                            {{--<input type="hidden" value="{{$col_rec->id}}" name="id">--}}
+                            {{--<input type="submit" value="Edit" class="btn btn-success">--}}
+                        {{--</form>--}}
                     </td>
                     <td>
-                        <form action="{{route('delete_area')}}">
+                        <form action="{{route('delete_col_rec')}}">
                             {{csrf_field()}}
-                            <input type="hidden" value="{{$area->id}}" name="id">
+                            <input type="hidden" value="{{$col_rec->id}}" name="id">
                             <input type="submit" value="Delete" class="btn btn-danger">
                         </form>
                     </td>

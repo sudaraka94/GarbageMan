@@ -8,9 +8,9 @@ class CollectionRecord extends Model
 {
     protected $table='collection_record';
 
-    public function user()
+    public function client()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Client');
     }
 
     public function truck()

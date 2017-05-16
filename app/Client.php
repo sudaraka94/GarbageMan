@@ -33,9 +33,7 @@ class Client extends Model
         return $this->hasMany('App\CollectionRecord');
     }
 
-    public function user_complaints(){
-        return $this->hasMany('App\UserComplaint');
-    }
+    
 
 
 }

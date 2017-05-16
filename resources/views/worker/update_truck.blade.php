@@ -12,23 +12,23 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('update_truck')}}">
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('truck_id') ? ' has-error' : '' }}">
-                                <label for="truck_id" class="col-md-4 control-label">Choose Collection Point</label>
+                                <label for="truck_id" class="col-md-4 control-label">Choose Truck No </label>
                                 <div class="col-md-6">
                                     <select  id="trcuk_id" class="form-control" name="truck_id" required autofocus>
                                         @foreach($trucks as $truck)
-                                            <option value="{{$truck->id}}" @if(isset($edit)) @if($col_rec->client_id==$client->id) selected @endif @endif>{{$client->address}}</option>
+                                            <option value="{{$truck->id}}"  @if(Auth::user()->truck_id==$truck->id) selected @endif >{{$truck->registration_no}}</option>
                                         @endforeach
                                     </select>
-                                    @if ($errors->has('client_id'))
+                                    @if ($errors->has('truck_id'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('client_id') }}</strong>
+                                        <strong>{{ $errors->first('truck_id') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
                             @if(isset($edit))
-                                <input type="hidden" value="{{$col_rec->id}}" name="id">
+                                <input type="hidden" value="{{Auth::user()->id}}" name="id">
                             @endif
 
                             <div class="form-group">
