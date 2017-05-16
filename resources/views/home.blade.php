@@ -165,11 +165,31 @@
             </div>
         @elseif(Auth::user()->type=="WORKER")
             <div class="col-sm-6 col-md-3">
-                <a href="{{route('manage_trucks')}}">
+                <a href="{{route('add_col_rec')}}">
                     <div class="thumbnail">
                         {{--<img src="..." alt="...">--}}
                         <div class="caption">
                             <h3>Add Collection Records</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <a href="{{route('manage_col_rec')}}">
+                    <div class="thumbnail">
+                        {{--<img src="..." alt="...">--}}
+                        <div class="caption">
+                            <h3>Manage Collection Records</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <a href="{{route('update_truck')}}">
+                    <div class="thumbnail">
+                        {{--<img src="..." alt="...">--}}
+                        <div class="caption">
+                            <h3>Update Truck</h3>
                         </div>
                     </div>
                 </a>

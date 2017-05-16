@@ -121,7 +121,7 @@ Route::group(['middleware' => 'auth'], function () {
 //delete area
         Route::get('/delete_collection_point', ['uses' => 'AdminController@delete_collection_point', 'as' => 'delete_collection_point']);
         
-    //TRUCK ROUTES
+    //Area ROUTES
 //get manage areas
         Route::get('/manage_trucks', ['uses' => 'AdminController@manage_trucks', 'as' => 'manage_trucks']);
 
@@ -143,6 +143,35 @@ Route::group(['middleware' => 'auth'], function () {
 
 //These routes are used to test the algo
         Route::get('/algo_test', ['uses' => 'AdminController@area_suggestion', 'as' => 'algo_test']);
+
+    });
+
+    //=============================================================================================================================
+//                                                        WORKER ROUTES
+//=============================================================================================================================
+    Route::group(['middleware' => 'worker'], function () {
+        //Collection Record ROUTES
+//get manage collection record
+        Route::get('/manage_col_rec', ['uses' => 'WorkerController@manage_col_rec', 'as' => 'manage_col_rec']);
+
+//get add collection record
+        Route::get('/add_col_rec', ['uses' => 'WorkerController@add_col_rec', 'as' => 'add_col_rec']);
+
+//post add collection record
+        Route::post('/add_col_rec', ['uses' => 'WorkerController@post_add_col_rec', 'as' => 'add_col_rec']);
+//get edit collection record
+        Route::get('/edit_col_rec', ['uses' => 'WorkerController@get_edit_col_rec', 'as' => 'edit_col_rec']);
+//post edit collection record
+        Route::post('/edit_col_rec', ['uses' => 'WorkerController@edit_col_rec', 'as' => 'edit_col_rec']);
+//delete collection record
+        Route::get('/delete_col_rec', ['uses' => 'WorkerController@delete_col_rec', 'as' => 'delete_col_rec']);
+        
+        
+//get update truck interface
+        Route::get('/update_truck', ['uses' => 'WorkerController@get_update_truck', 'as' => 'update_truck']);
+
+//post update truck        
+        Route::post('/update_truck', ['uses' => 'WorkerController@update_truck', 'as' => 'update_truck']);
 
     });
 });

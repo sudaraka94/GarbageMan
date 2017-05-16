@@ -15,9 +15,9 @@ class CreateCollectionRecordTable extends Migration
     {
         Schema::create('collection_record', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('worker_id');
+            $table->integer('client_id');
             $table->integer('truck_id');
-            $table->float('weight');
             $table->string('status');
             $table->timestamps();
         });
