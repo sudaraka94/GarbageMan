@@ -76,6 +76,7 @@ class AdminController extends Controller
     public function add_collection_point(Request $request){
         $this->validate($request, [
             'email' => 'required|string|email|max:255|exists:users,email',
+            'user_id' => 'required|unique:client,user_id',
             'address' => 'required|string|min:6',
             'area' => 'required',
             'lat_in' => 'required|string',
@@ -184,6 +185,7 @@ class AdminController extends Controller
         $this->validate($request, [
             'email' => 'required|string|email|max:255|exists:users,email',
             'address' => 'required|string|min:6',
+            'user_id' => 'required|unique:client,user_id',
             'area' => 'required',
             'lat_in' => 'required|string',
             'lng_in' => 'required|string',

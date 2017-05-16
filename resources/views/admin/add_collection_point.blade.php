@@ -18,6 +18,12 @@
             </div>
         @endif
         <div class="container">
+            @if ($errors->has('user_id'))
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Error!</strong> This email has been registered already.
+                </div>
+            @endif
             <h2>Add a client</h2>
             <form class="form-horizontal" action="@if (isset($edit)){{route('edit_collection_point')}} @else {{route('add_client')}} @endif" method="post">
                 {{csrf_field()}}
