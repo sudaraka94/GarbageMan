@@ -9,4 +9,4 @@
    about the already developing countries is different. They are using the traditional methods
    for waste management and that makes the task inefficient. This software is intended to help
    the developing countries to make their waste management processes more effective with
-   the aid of modern technologie
+   the aid of modern technologies.
