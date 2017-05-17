@@ -18,6 +18,6 @@ class ExampleTest extends TestCase
     {
         $response = true;
 
-        $response->assertValue(true);
+        $response->assertTrue(true);
     }
 }
