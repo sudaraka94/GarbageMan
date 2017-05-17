@@ -19,7 +19,7 @@
                                 <img class="media-object" alt="user Image" style="width: 50px; height: 50px;" src="{{asset('img/user.png')}}">
                             </div>
                             <div class="media-body">
-                                <h5 class="media-heading">{{$complaint->user->name}}</h5>
+                                <h5 class="media-heading">{{$complaint->user->name}} @if($complaint->admin_new==1) <span class="label label-success">New</span> @endif</h5>
                                 <small>{{str_limit($complaint->complaint, $limit = 30, $end = '...')}}</small>
                             </div>
                         </div>

@@ -58,6 +58,8 @@ class user_controller extends Controller
         }else{
             $complaint_sel=UserComplaint::where('id',$complaint_id)->get()->first();
         }
+        $complaint_sel->new=0;
+        $complaint_sel->save();
         $complaints=UserComplaint::where('user_id',Auth::user()->getAuthIdentifier())->get();
         return view('user.chat')->with('complaints',$complaints)->with('complaint_sel',$complaint_sel);
     }
@@ -70,6 +72,9 @@ class user_controller extends Controller
         $reply->message=$request->complaint;
         $reply->user_id=Auth::user()->getAuthIdentifier();
         $reply->save();
+        $complaint=$reply->user_complaint;
+        $complaint->admin_new=1;
+        $complaint->save();
         return redirect()->route('user_complaints',['complaint_id'=>$request->complaint_id]);
     }
 }

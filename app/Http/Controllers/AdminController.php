@@ -314,6 +314,8 @@ class AdminController extends Controller
         }else{
             $complaint_sel=UserComplaint::where('id',$complaint_id)->get()->first();
         }
+        $complaint_sel->admin_new=0;
+        $complaint_sel->save();
         $complaints=UserComplaint::get();
         return view('admin.chat')->with('complaints',$complaints)->with('complaint_sel',$complaint_sel);
     }
@@ -325,6 +327,9 @@ class AdminController extends Controller
         $reply->message=$request->complaint;
         $reply->user_id=Auth::user()->getAuthIdentifier();
         $reply->save();
+        $complaint=$reply->user_complaint;
+        $complaint->new=1;
+        $complaint->save();
         return redirect()->route('admin_complaints',['complaint_id'=>$request->complaint_id]);
     }
 }

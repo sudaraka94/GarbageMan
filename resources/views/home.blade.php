@@ -70,6 +70,7 @@
                             {{--<img src="..." alt="...">--}}
                             <div class="caption">
                                 <h3>View Complaints</h3>
+                                @if($recent_activity==true) <span class="label label-success">New Messeges</span> @endif
                             </div>
                         </div>
                     </a>
@@ -98,6 +99,7 @@
                             {{--<img src="..." alt="...">--}}
                             <div class="caption">
                                 <h3>View Complaints</h3>
+                                @if($recent_activity==true) <span class="label label-success">New Messeges</span> @endif
                             </div>
                         </div>
                     </a>
