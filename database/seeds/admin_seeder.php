@@ -17,5 +17,6 @@ class admin_seeder extends Seeder
             'type' => 'ADMIN',
             'password' => bcrypt('111111'),
         ]);
+        
     }
 }
