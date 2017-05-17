@@ -307,7 +307,7 @@ class AdminController extends Controller
         return $chosen_areas;
     }
 
-    public function chat($complaint_id)
+    public function chat($complaint_id=null)
     {
         if($complaint_id==null){
             $complaint_sel=UserComplaint::get()->first();

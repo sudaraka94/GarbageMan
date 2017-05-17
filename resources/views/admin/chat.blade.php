@@ -13,15 +13,17 @@
             <div class="conversation-wrap col-lg-3">
 
                 @foreach($complaints as $complaint)
-                <div class="media conversation">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" alt="user Image" style="width: 50px; height: 50px;" src="{{asset('img/user.png')}}">
+                    <a href="{{route('admin_complaints',['id'=>$complaint->id])}}">
+                        <div class="media conversation">
+                            <div class="pull-left">
+                                <img class="media-object" alt="user Image" style="width: 50px; height: 50px;" src="{{asset('img/user.png')}}">
+                            </div>
+                            <div class="media-body">
+                                <h5 class="media-heading">{{$complaint->user->name}}</h5>
+                                <small>{{str_limit($complaint->complaint, $limit = 30, $end = '...')}}</small>
+                            </div>
+                        </div>
                     </a>
-                    <div class="media-body">
-                        <h5 class="media-heading">{{$complaint->user->name}}</h5>
-                        <small>{{str_limit($complaint->complaint, $limit = 30, $end = '...')}}</small>
-                    </div>
-                </div>
                 @endforeach
             </div>
 
@@ -32,9 +34,9 @@
 
 
                     <div class="media msg ">
-                        <a class="pull-left" href="#">
+                        <div class="pull-left" >
                             <img class="media-object" alt="user Image" style="width: 50px; height: 50px;" src="{{asset('img/user.png')}}">
-                        </a>
+                        </div>
                         <div class="media-body">
                             <small class="pull-right time"><i class="fa fa-clock-o"></i> {{$complaint_sel->created_at}}</small>
                             <h5 class="media-heading">{{$complaint_sel->user->name}}</h5>
@@ -43,9 +45,9 @@
                     </div>
                     @foreach($complaint_sel->complaint_replies as $reply)
                         <div class="media msg ">
-                            <a class="pull-left" href="#">
+                            <div class="pull-left" >
                                 <img class="media-object" alt="user Image" style="width: 50px; height: 50px;" src="{{asset('img/user.png')}}">
-                            </a>
+                            </div>
                             <div class="media-body">
                                 <small class="pull-right time"><i class="fa fa-clock-o"></i> {{$reply->created_at}}</small>
                                 <h5 class="media-heading">{{$reply->user->name}}</h5>

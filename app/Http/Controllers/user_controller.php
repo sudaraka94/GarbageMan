@@ -51,14 +51,14 @@ class user_controller extends Controller
         return view('user.view_user_complaints');
     }
 
-    public function chat($complaint_id)
+    public function chat($complaint_id=null)
     {
         if($complaint_id==null){
             $complaint_sel=UserComplaint::get()->first();
         }else{
             $complaint_sel=UserComplaint::where('id',$complaint_id)->get()->first();
         }
-        $complaints=UserComplaint::get();
+        $complaints=UserComplaint::where('user_id',Auth::user()->getAuthIdentifier())->get();
         return view('user.chat')->with('complaints',$complaints)->with('complaint_sel',$complaint_sel);
     }
 
