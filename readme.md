@@ -1,5 +1,4 @@
-<h1>Garbage Man</h1>
-<img src="https://travis-ci.org/sudaraka94/GarbageMan.svg?branch=master">
+<h1>Garbage Man  <img src="https://travis-ci.org/sudaraka94/GarbageMan.svg?branch=master"></h1>
 <p>Waste management is one of the main topics which are being thoroughly discussed in the
    current society. A lot of different methods are used in the context of waste management in
    different parts of the world. All of those methods are engineered to suit the environmental
