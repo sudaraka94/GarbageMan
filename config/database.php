@@ -86,10 +86,10 @@ return [
 
         'testing' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_TEST_HOST', 'localhost'),
-            'database'  => env('DB_TEST_DATABASE', 'homestead_test'),
-            'username'  => env('DB_TEST_USERNAME', 'homestead'),
-            'password'  => env('DB_TEST_PASSWORD', 'secret'),
+            'host'      => 'us-cdbr-iron-east-03.cleardb.net',
+            'database'  => 'heroku_49b82e622192a79',
+            'username'  => 'b3b1163701e0d5',
+            'password'  => 'a5eb39b3',
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
