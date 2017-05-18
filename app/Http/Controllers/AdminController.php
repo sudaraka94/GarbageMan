@@ -77,16 +77,14 @@ class AdminController extends Controller
 
     public function add_collection_point(Request $request){
         $this->validate($request, [
-            'email' => 'required|string|email|max:255|exists:users,email',
-            'user_id' => 'required|unique:client,user_id',
+            'email' => 'required|unique:client,user_id',
             'address' => 'required|string|min:6',
             'area' => 'required',
             'lat_in' => 'required|string',
             'lng_in' => 'required|string',
         ]);
         $client=new Client();
-        $user=User::where('email',$request->email)->first();
-        $client->user_id=$user->id;
+        $client->user_id=$request->email;
         $client->address=$request->address;
         $client->area_id=$request->area;
         $client->lat_in=$request->lat_in;
@@ -185,16 +183,14 @@ class AdminController extends Controller
     public function edit_collection_point(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|string|email|max:255|exists:users,email',
+            'email' => 'required',
             'address' => 'required|string|min:6',
-            'user_id' => 'required|unique:client,user_id',
             'area' => 'required',
             'lat_in' => 'required|string',
             'lng_in' => 'required|string',
         ]);
         $client=Client::where('id',$request->id)->get()->first();
-        $user=User::where('email',$request->email)->first();
-        $client->user_id=$user->id;
+        $client->user_id=$request->email;
         $client->address=$request->address;
         $client->area_id=$request->area;
         $client->lat_in=$request->lat_in;
@@ -322,6 +318,9 @@ class AdminController extends Controller
 
     public function post_reply(Request $request)
     {
+        $this->validate($request, [
+            'message' => 'required|string',
+        ]);
         $reply= new ComplaintReply();
         $reply->user_complaint_id=$request->complaint_id;
         $reply->message=$request->complaint;

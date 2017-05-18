@@ -44,16 +44,16 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-sm-6 col-md-3">
-                    <a href="">
-                        <div class="thumbnail">
+                {{--<div class="col-sm-6 col-md-3">--}}
+                    {{--<a href="">--}}
+                        {{--<div class="thumbnail">--}}
                             {{--<img src="..." alt="...">--}}
-                            <div class="caption">
-                                <h3>Edit Profile</h3>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                            {{--<div class="caption">--}}
+                                {{--<h3>Edit Profile</h3>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</a>--}}
+                {{--</div>--}}
                 <div class="col-sm-6 col-md-3">
                     <a href="{{route('view_complaint')}}">
                         <div class="thumbnail">

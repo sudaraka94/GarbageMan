@@ -24,18 +24,23 @@
                     <strong>Error!</strong> This email has been registered already.
                 </div>
             @endif
-            <h2>Add a client</h2>
+            @if(isset($edit))<h2>Edit Collection Point</h2> @else <h2>Add a client</h2> @endif
             <form class="form-horizontal" action="@if (isset($edit)){{route('edit_collection_point')}} @else {{route('add_client')}} @endif" method="post">
                 {{csrf_field()}}
-            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}" @if(isset($edit)) style="visibility: hidden;" @endif>
                 <label for="email" class="col-md-4 control-label">User E-Mail Address</label>
                 <div class="col-md-8">
-                    <input list="emails" id="email" type="email" class="form-control" name="email" value="@if(isset($edit)){{$client->user->email}}@else{{ old('email') }}@endif"  required>
-                    <datalist id="emails">
+                    {{--<input list="emails" id="email" type="email" class="form-control" name="email" value="@if(isset($edit)){{$client->user->email}}@else{{ old('email') }}@endif"  required>--}}
+                    {{--<datalist id="emails">--}}
+                        {{--@foreach($users as $user)--}}
+                            {{--<option value="{{$user->id}}">{{$user->email}}</option>--}}
+                        {{--@endforeach--}}
+                    {{--</datalist>--}}
+                    <select name="email" id="email" class="form-control">
                         @foreach($users as $user)
-                            <option value="{{$user->email}}">
+                        <option value="{{$user->id}}" @if(isset($edit))@if($client->user_id==$user->id) selected @endif @endif>{{$user->email}}</option>
                         @endforeach
-                    </datalist>
+                    </select>
                     @if ($errors->has('email'))
                         <span class="help-block">
                             <strong>{{ $errors->first('email') }}</strong>

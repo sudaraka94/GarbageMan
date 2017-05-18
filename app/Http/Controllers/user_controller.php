@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 class user_controller extends Controller
 {
     public function submit_record(Request $request){
+        $this->validate($request, [
+            'amount' => 'required',
+        ]);
         $rec=new GarbageRecord();
         $rec->weight=$request->amount;
         $rec->client_id=Auth::user()->client->id;
@@ -23,6 +26,9 @@ class user_controller extends Controller
     }
 
     public function delete_record(Request $request){
+        $this->validate($request, [
+            'id' => 'required',
+        ]);
         $record=GarbageRecord::where('id',$request->id);
         $record->delete();
         return redirect()->route('view_records');
@@ -39,6 +45,9 @@ class user_controller extends Controller
     }
     
     public function post_complaint(Request $request){
+        $this->validate($request, [
+            'complaint' => 'required|string',
+        ]);
         $com=new UserComplaint();
         $com->user_id=Auth::user()->getAuthIdentifier();
         $com->complaint=$request->complaint;
@@ -66,7 +75,9 @@ class user_controller extends Controller
 
     public function post_reply(Request $request)
     {
-        
+        $this->validate($request, [
+            'message' => 'required|string',
+        ]);
         $reply= new ComplaintReply();
         $reply->user_complaint_id=$request->complaint_id;
         $reply->message=$request->complaint;
